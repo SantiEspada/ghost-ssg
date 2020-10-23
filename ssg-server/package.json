@@ -1,0 +1,15 @@
+{
+  "name": "ssg-server",
+  "version": "0.0.1",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node -r esm app.js"
+  },
+  "dependencies": {
+    "await-exec": "^0.1.2",
+    "body-parser": "^1.19.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
+  }
+}

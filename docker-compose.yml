@@ -6,6 +6,8 @@ services:
     restart: always
     ports:
       - ${GHOST_PORT}:2368
+    volumes:
+      - ./ghost/fixtures.json:/var/lib/ghost/current/core/server/data/schema/fixtures/fixtures.json
     environment:
       database__client: mysql
       database__connection__host: db
@@ -15,6 +17,10 @@ services:
       url: ${GHOST_PUBLIC_URL}
     depends_on:
       - db
+      - ssg
+    networks:
+      - default
+      - ssg
 
   db:
     image: mysql:5.7
@@ -25,3 +31,22 @@ services:
       - ${MYSQL_DATA_PATH}:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+  ssg:
+    build:
+      context: ./ssg-server
+    environment:
+      SOURCE_URL: ${GHOST_PUBLIC_URL}
+      DESTINATION_URL: ${SSG_DESTINATION_URL}
+      CONTENT_FOLDER_NAME: ${SSG_CONTENT_FOLDER_NAME}
+      GIT_REPOSITORY_URL: ${SSG_GIT_REPOSITORY_URL}
+      GIT_EMAIL: ${SSG_GIT_EMAIL}
+    ports:
+      - ${SSG_PORT}:3000
+    command: yarn start
+    networks:
+      ssg:
+        aliases:
+          - ssg.local
+networks:
+  ssg:

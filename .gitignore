@@ -1,2 +1,4 @@
 .env
 *_data
+static
+node_modules

@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   ghost:
@@ -23,7 +23,7 @@ services:
       - ssg
 
   db:
-    image: mysql:5.7
+    image: biarms/mysql:5.7
     restart: always
     ports:
       - ${MYSQL_PORT}:3306

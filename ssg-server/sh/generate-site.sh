@@ -21,18 +21,18 @@ git pull
 rm -rf ${folder}
 
 # Copy blog content
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/
 
 # Copy 404 page
-wget --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links --content-on-error --timestamping ${content_url}/404.html
+wget -e robots=off --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links --content-on-error --timestamping ${content_url}/404.html
 
 # Copy sitemaps
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap.xsl
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap.xml
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-pages.xml
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-posts.xml
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-authors.xml
-wget --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-tags.xml
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap.xsl
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap.xml
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-pages.xml
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-posts.xml
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-authors.xml
+wget -e robots=off --recursive --no-host-directories --directory-prefix=${folder} --adjust-extension --timeout=30 --no-parent --convert-links ${content_url}/sitemap-tags.xml
 
 # Replace original domain with final one
 LC_ALL=C find ./${folder} -type f -not -wholename *.git* -exec sed -i -e "s,${from_url},${to_url},g" {} +
